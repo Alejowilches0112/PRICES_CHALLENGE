@@ -1,4 +1,4 @@
-package com.ezolucion.prices.prices_challenge;
+package com.ezolucion.prices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

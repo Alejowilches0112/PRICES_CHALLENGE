@@ -1,4 +1,4 @@
-package com.ezolucion.prices.prices_challenge;
+package com.ezolucion.prices;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
