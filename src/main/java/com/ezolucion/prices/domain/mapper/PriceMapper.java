@@ -1,4 +1,4 @@
-package com.ezolucion.prices.common.mapper;
+package com.ezolucion.prices.domain.mapper;
 
 import com.ezolucion.prices.domain.in.PriceRequest;
 import com.ezolucion.prices.domain.out.PricesFindResponse;

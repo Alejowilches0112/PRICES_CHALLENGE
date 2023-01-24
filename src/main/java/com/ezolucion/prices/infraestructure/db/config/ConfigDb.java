@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@Configuration
-@EnableJpaRepositories (basePackages = "com.ezolucion.prices.application.repository")
+/*@Configuration
+@EnableJpaRepositories (basePackages = "com.ezolucion.prices.infraestructure.db.repository")
 @EntityScan(basePackages = "com.ezolucion.prices.infraestructure.db.entity")
 @ConfigurationProperties("spring.datasource")
 @EnableJpaAuditing
-@Slf4j
+@Slf4j*/
 public class ConfigDb{
 }

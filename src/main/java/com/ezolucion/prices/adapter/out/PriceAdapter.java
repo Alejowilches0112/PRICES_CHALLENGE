@@ -1,8 +1,8 @@
 package com.ezolucion.prices.adapter.out;
 
-import com.ezolucion.prices.application.repository.IPriceRepository;
+import com.ezolucion.prices.infraestructure.db.repository.IPriceRepository;
 import com.ezolucion.prices.common.exception.PricesInException;
-import com.ezolucion.prices.common.mapper.PriceMapper;
+import com.ezolucion.prices.domain.mapper.PriceMapper;
 import com.ezolucion.prices.domain.in.PriceRequest;
 import com.ezolucion.prices.domain.in.PricesFindRequest;
 import com.ezolucion.prices.domain.out.PricesFindResponse;
@@ -26,13 +26,21 @@ public class PriceAdapter implements PriceSavePort, PriceFindPort {
     private PriceMapper priceMapper;
     @Override
     public PricesFindResponse findPricePort(PricesFindRequest priceFind) {
-        var priceEntity = priceRepository.findByIdBrandAndIdProductAndStartDate(priceFind.getIdBrand(), priceFind.getIdProduct(), priceFind.getDateApplication());
-        if(priceEntity.isPresent() || priceEntity.isEmpty()){
+        var pricesList = priceRepository.findByIdBrandAndIdProductAndStartDateOrderByPriceAsc(priceFind.getIdBrand(), priceFind.getIdProduct(), priceFind.getDateApplication());
+        if(pricesList.isEmpty()){
             log.info("No se encontraron resultados con los parametros de busqueda.");
             throw new PricesInException("No se encontraron resultados con los parametros de busqueda.", HttpStatus.NOT_FOUND);
         }
-
-        return null;
+        var totalList = pricesList.size() - 1;
+        var response = PricesFindResponse.builder()
+                .listPrice(pricesList.get(totalList).getPriceList())
+                .price(pricesList.get(totalList).getPrice())
+                .idProduct(pricesList.get(totalList).getIdProduct())
+                .idBrand(pricesList.get(totalList).getIdBrand())
+                .dateInit(pricesList.get(totalList).getStartDate())
+                .dateEnd(pricesList.get(totalList).getEndDate())
+                .build();
+        return response;
     }
 
     @Override
